@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fahz - Digital Hacking</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Share Tech Mono', monospace;
+            background: linear-gradient(135deg, #0c0c0c 0%, #1a1a2e 50%, #16213e 100%);
+            color: #e6e6e6;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 40px 20px;
+            position: relative;
+        }
+        
+        .indonesia-flag {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 2.5em;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .profile-section {
+            position: relative;
+            margin-bottom: 40px;
+        }
+        
+        .photo-frame {
+            position: relative;
+            width: 220px;
+            height: 220px;
+            border-radius: 50%;
+            padding: 8px;
+            background: linear-gradient(45deg, #ff0000, #ffffff, #ff0000);
+            animation: rotate 10s linear infinite;
+            box-shadow: 0 0 30px rgba(255, 0, 0, 0.4);
+        }
+        
+        .photo-frame::before {
+            content: '';
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            background: linear-gradient(45deg, #ff0000, #ffffff, #ff0000, #ffffff);
+            border-radius: 50%;
+            z-index: -1;
+            animation: rotate 8s linear infinite reverse;
+        }
+        
+        .hacker-photo {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #0c0c0c;
+        }
+        
+        .floating-text {
+            position: absolute;
+            font-size: 0.9em;
+            color: #ff0000;
+            font-weight: bold;
+            animation: floatAround 15s linear infinite;
+        }
+        
+        .floating-text:nth-child(1) { top: 10px; left: -60px; animation-delay: 0s; }
+        .floating-text:nth-child(2) { top: -20px; right: -70px; animation-delay: -3s; }
+        .floating-text:nth-child(3) { bottom: 30px; left: -80px; animation-delay: -6s; }
+        .floating-text:nth-child(4) { bottom: 10px; right: -90px; animation-delay: -9s; }
+        
+        .main-content {
+            text-align: center;
+            max-width: 800px;
+            background: rgba(10, 10, 10, 0.8);
+            padding: 40px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 0 50px rgba(255, 0, 0, 0.2);
+        }
+        
+        .hacker-name {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.2em;
+            font-weight: 900;
+            background: linear-gradient(45deg, #ff0000, #ffffff, #ff0000);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+            text-shadow: 0 0 30px rgba(255, 0, 0, 0.5);
+        }
+        
+        .region {
+            font-size: 1.4em;
+            color: #ffffff;
+            margin-bottom: 30px;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 25px;
+            border-radius: 30px;
+            display: inline-block;
+        }
+        
+        .quote-box {
+            background: linear-gradient(135deg, rgba(255, 0, 0, 0.1) 0%, rgba(255, 255, 255, 0.05) 100%);
+            padding: 30px;
+            border-radius: 15px;
+            border-left: 4px solid #ff0000;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .quote-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: translateX(-100%);
+            animation: shine 3s infinite;
+        }
+        
+        .quote {
+            font-size: 1.3em;
+            line-height: 1.6;
+            color: #ffffff;
+            font-style: italic;
+            margin-bottom: 15px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .author {
+            font-family: 'Orbitron', sans-serif;
+            color: #ff0000;
+            font-weight: bold;
+            font-size: 1.1em;
+            text-align: right;
+        }
+        
+        .warning {
+            font-family: 'Orbitron', sans-serif;
+            color: #ff0000;
+            font-size: 1.2em;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-top: 30px;
+            padding: 15px;
+            border: 1px solid #ff0000;
+            border-radius: 10px;
+            animation: pulse 2s ease-in-out infinite;
+            background: rgba(255, 0, 0, 0.1);
+        }
+        
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        @keyframes rotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes floatAround {
+            0% { transform: rotate(0deg) translateX(80px) rotate(0deg); }
+            100% { transform: rotate(360deg) translateX(80px) rotate(-360deg); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+        
+        @media (max-width: 768px) {
+            .hacker-name { font-size: 2.5em; }
+            .photo-frame { width: 180px; height: 180px; }
+            .floating-text { font-size: 0.7em; }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles" id="particles"></div>
+    
+    <div class="container">
+        <div class="indonesia-flag">🇮🇩</div>
+        
+        <div class="profile-section">
+            <div class="photo-frame">
+                <!-- GANTI SRC DENGAN LINK FOTO ANDA -->
+                <img src="https://files.catbox.moe/5yah59.png" alt="Fahz" class="hacker-photo">
+            </div>
+            <div class="floating-text">INDONESIA</div>
+            <div class="floating-text">JOGJA</div>
+            <div class="floating-text">CYBER</div>
+            <div class="floating-text">SECURITY</div>
+        </div>
+        
+        <div class="main-content">
+            <div class="hacker-name">Fahz -Blackhat or WhiteHat?</div>
+            <div class="region">Jogja Region</div>
+            
+            <div class="quote-box">
+                <div class="quote">
+                    "Semua hal yang dilakukan orang tua mu adalah untukmu, maka jangan sakiti hatinya, ATAU KAMU YANG AKAN TERSAKITI SELAMANYA"
+                </div>
+                <div class="author">- FahzQuote</div>
+            </div>
+            
+            <div class="warning">
+                [ Hacked by Fahz - Whoops, Ur System Was Broken ]
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Particle System Background
+        class ParticleSystem {
+            constructor() {
+                this.canvas = document.getElementById('particles');
+                this.ctx = this.canvas.getContext('2d');
+                this.particles = [];
+                this.resize();
+                this.init();
+                window.addEventListener('resize', () => this.resize());
+            }
+            
+            resize() {
+                this.canvas.width = window.innerWidth;
+                this.canvas.height = window.innerHeight;
+            }
+            
+            init() {
+                const particleCount = 50;
+                for (let i = 0; i < particleCount; i++) {
+                    this.particles.push({
+                        x: Math.random() * this.canvas.width,
+                        y: Math.random() * this.canvas.height,
+                        size: Math.random() * 2 + 1,
+                        speedX: (Math.random() - 0.5) * 0.5,
+                        speedY: (Math.random() - 0.5) * 0.5,
+                        color: Math.random() > 0.5 ? '#ff0000' : '#ffffff',
+                        opacity: Math.random() * 0.5 + 0.1
+                    });
+                }
+                this.animate();
+            }
+            
+            animate() {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                this.particles.forEach(particle => {
+                    particle.x += particle.speedX;
+                    particle.y += particle.speedY;
+                    
+                    if (particle.x < 0 || particle.x > this.canvas.width) particle.speedX *= -1;
+                    if (particle.y < 0 || particle.y > this.canvas.height) particle.speedY *= -1;
+                    
+                    this.ctx.beginPath();
+                    this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
+                    this.ctx.fillStyle = particle.color;
+                    this.ctx.globalAlpha = particle.opacity;
+                    this.ctx.fill();
+                });
+                
+                this.ctx.globalAlpha = 1;
+                requestAnimationFrame(() => this.animate());
+            }
+        }
+        
+        new ParticleSystem();
+    </script>
+</body>
+</html>
